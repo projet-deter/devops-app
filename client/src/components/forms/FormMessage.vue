@@ -26,7 +26,7 @@
       <div class="form-group">
         <label for="content">Message</label>
         <Field
-          type="textarea"
+          type="text"
           name="content"
           class="form-control"
           placeholder="Votre message..."
@@ -67,6 +67,7 @@ export default {
       // vide le formulaire
       this.messageForm.pseudo = "";
       this.messageForm.content = "";
+      this.$v.$reset();
     },
     handleNewMessage: function() {
       const data = {
@@ -90,12 +91,19 @@ export default {
 </script>
 
 <style>
+.form {
+  margin: auto;
+  width: 60%;
+}
+
 .form-group {
   display: flex;
+  align-items: center;
 }
 
 .form-group > label {
   margin: 0 9px 0 0;
+  width: 20%;
 }
 
 .alert-list {
