@@ -91,7 +91,7 @@ export default {
 </script>
 
 <style>
-.form {
+form {
   margin: auto;
   width: 60%;
 }
@@ -103,7 +103,7 @@ export default {
 
 .form-group > label {
   margin: 0 9px 0 0;
-  width: 20%;
+  min-width: 75px;
 }
 
 .alert-list {
