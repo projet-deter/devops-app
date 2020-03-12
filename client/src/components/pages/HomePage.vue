@@ -1,41 +1,39 @@
 <template>
   <div class="home-body">
-    <button type="button" class="btn btn-primary btn-md" v-on:click.prevent="openModalForm">Ajouter</button>
-    <p v-if="!$store.state.votes.length">Pas de vote</p>
-    <div class="votes-list" v-if="$store.state.votes.length">
-      <CardVote v-for="vote in $store.state.votes" v-bind:key="vote.id" v-bind:vote="vote" />
+    <h1>Nouveau message</h1>
+    <FormMessage />
+
+    <h1>Liste des messages</h1>
+    <p v-if="!$store.state.messages.length">Pas de message</p>
+    <div class="messages-list" v-if="$store.state.messages.length">
+      <CardMessage v-for="message in $store.state.messages" v-bind:key="message.id" v-bind:message="message" />
     </div>
-    <ModalForm />
   </div>
 </template>
 
 <script>
-import CardVote from "../cards/CardVote.vue";
-import ModalForm from "../modals/ModalForm.vue";
+import CardMessage from "../cards/CardMessage.vue";
+import FormMessage from "../forms/FormMessage.vue";
 
 export default {
   name: "HomePage",
   components: {
-    ModalForm,
-    CardVote
+    FormMessage,
+    CardMessage
   },
   data: () => ({
-    voteActif: {}
+    messageActif: {}
   }),
   created() {
-    this.fetchVotes();
+    this.fetchMessages();
   },
-  updated() {
-    this.fetchVotes();
-  },
+  // updated() {
+  //   this.fetchMessages();
+  // },
   methods: {
-    fetchVotes: function() {
-      // récupération de la liste des votes
-      this.$store.dispatch("getVotes");
-    },
-    openModalForm: function() {
-      // on ouvre la modal du formulaire
-      this.$store.state.isOpenForm = true;
+    fetchMessages: function() {
+      // récupération de la liste des messages
+      this.$store.dispatch("getMessages");
     }
   }
 };
