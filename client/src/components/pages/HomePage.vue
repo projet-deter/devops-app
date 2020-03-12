@@ -27,9 +27,6 @@ export default {
   created() {
     this.fetchMessages();
   },
-  // updated() {
-  //   this.fetchMessages();
-  // },
   methods: {
     fetchMessages: function() {
       // récupération de la liste des messages
