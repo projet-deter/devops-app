@@ -1,7 +1,6 @@
 <template>
   <div class="card">
     <div class="card-body">
-      <span class="card-title">{{message.pseudo ? message.pseudo : 'Anonymous'}}</span>
       <span>{{message.content}}</span>
     </div>
   </div>

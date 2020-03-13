@@ -4,23 +4,9 @@
     <Formik @on-submit="handleNewMessage" submit-label="Envoyer" :initial-values="messageForm">
       <!-- alert-list -->
       <div class="alert-list">
-        <div class="alert" v-if="$v.$anyDirty && $v.messageForm.pseudo.$error">
-          <span v-if="!$v.messageForm.pseudo.required">Le pseudo est obligatoire</span>
-        </div>
         <div class="alert" v-if="$v.$anyDirty && $v.messageForm.content.$error">
           <span v-if="!$v.messageForm.content.required">Le message est obligatoire</span>
         </div>
-      </div>
-      <!-- form-group | pseudo -->
-      <div class="form-group">
-        <label for="pseudo">Pseudo</label>
-        <Field
-          type="text"
-          name="pseudo"
-          class="form-control"
-          placeholder="Aria Stark"
-          v-model.trim="$v.messageForm.pseudo.$model"
-        />
       </div>
       <!-- form-group | content -->
       <div class="form-group">
@@ -58,21 +44,18 @@ export default {
   data: () => ({
     // données du formulaire messageForm
     messageForm: {
-      pseudo: "",
       content: ""
     }
   }),
   methods: {
     resetForm: function() {
       // vide le formulaire
-      this.messageForm.pseudo = "";
       this.messageForm.content = "";
       this.$v.$reset();
     },
     handleNewMessage: function() {
       const data = {
-        pseudo: this.messageForm.pseudo,
-        content: this.messageForm.content,
+        message: this.messageForm.content,
       };
     // envoie pour CRÉATION du message
     this.$store.dispatch("postMessage", data).then(() => {
@@ -83,7 +66,6 @@ export default {
   },
   validations: {
     messageForm: {
-      pseudo: { required },
       content: { required }
     }
   }
@@ -91,11 +73,6 @@ export default {
 </script>
 
 <style>
-form {
-  margin: auto;
-  width: 60%;
-}
-
 .form-group {
   display: flex;
   align-items: center;
