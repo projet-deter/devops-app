@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import { http } from "../axios/http-common";
+import { httpGET, httpPOST } from "../axios/http-common";
 
 Vue.use(Vuex);
 
@@ -8,11 +8,11 @@ const store = new Vuex.Store({
   state: {
     error: "",
     // liste des données
-    messages: [],
+    messages: []
   },
   actions: {
     getMessages: context => {
-      http
+      httpGET
         .get("messages")
         .then(response => {
           context.state.error = "";
@@ -25,16 +25,13 @@ const store = new Vuex.Store({
     },
     postMessage: (context, data) => {
       return new Promise((resolve, reject) => {
-        http
+        httpPOST
           .post("messages", data)
-          .then(response => {
-            // ajout du nouveau message dans la liste messages
-            context.commit("addMessage", response.data);
+          .then(() => {
             resolve();
           })
           .catch(error => {
-            context.state.error = error;
-            reject();
+            reject(error);
           });
       });
     }
@@ -46,12 +43,6 @@ const store = new Vuex.Store({
         return {
           content: item
         };
-      });
-    },
-    addMessage: (state, payload) => {
-      // ajout du nouvel Object message dans la liste messages
-      state.messages.push({
-        content: payload
       });
     }
   }
