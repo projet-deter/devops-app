@@ -44,16 +44,14 @@ const store = new Vuex.Store({
       // ajout de chaque Object message dans la liste messages
       state.messages = payload.map(item => {
         return {
-          pseudo: item.pseudo,
-          content: item.content
+          content: item
         };
       });
     },
     addMessage: (state, payload) => {
       // ajout du nouvel Object message dans la liste messages
       state.messages.push({
-        pseudo: payload.pseudo,
-        content: payload.content
+        content: payload
       });
     }
   }

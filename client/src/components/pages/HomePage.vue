@@ -6,7 +6,7 @@
     <h1>Liste des messages</h1>
     <p v-if="!$store.state.messages.length">Pas de message</p>
     <div class="messages-list" v-if="$store.state.messages.length">
-      <CardMessage v-for="message in $store.state.messages" v-bind:key="message.id" v-bind:message="message" />
+      <CardMessage v-for="message in $store.state.messages.slice().reverse()" v-bind:key="message.id" v-bind:message="message" />
     </div>
   </div>
 </template>
